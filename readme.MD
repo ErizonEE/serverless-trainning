@@ -1,0 +1,1 @@
+# Some lambda functions for trainning in serverless
