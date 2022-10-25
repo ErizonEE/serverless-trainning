@@ -1,0 +1,23 @@
+{
+  "name": "serverless-trainning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErizonEE/serverless-trainning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErizonEE/serverless-trainning/issues"
+  },
+  "homepage": "https://github.com/ErizonEE/serverless-trainning#readme",
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.2.0-e97ab49"
+  }
+}

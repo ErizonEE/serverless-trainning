@@ -1,0 +1,12 @@
+erizonEncina-createClient:
+  handler: create-client/index.handler
+  description: 'Create new Client'
+  environment:
+    CLIENT_TABLE: erizonEncina-client
+    DEFAULT_REGION: us-east-1
+    CLIENT_CREATED_TOPIC_ARN: !Sub arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:table/${file(resource/index.json):score.scoresTable}
+
+  events:
+    - http:
+          path: /clients
+          method: post

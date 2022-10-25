@@ -1,0 +1,31 @@
+service: erizonEncina-ejercicioSls
+
+frameworkVersion: ^2.59.0
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs14.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 'dynamodb:PutItem'
+          Resource: '*'
+        - Effect: Allow
+          Action: 'dynamodb:UpdateItem'
+          Resource: '*'
+        - Effect: Allow
+          Action: 'dynamodb:GetItem'
+          Resource: '*'
+        # SNS
+        - Effect: Allow
+          Action: 'sns:Publish'
+          Resource: '*'
+
+functions:
+  - ${file(create-client/sls/serverless.yml)}
+
+
+resources:
+  - ${file(create-client/sls/dynamodb.yml)}

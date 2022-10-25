@@ -13,7 +13,7 @@ const create = async (body) => {
   const dbParams = {
     Item: {
       dni: {
-        N: body.dni,
+        S: body.dni.toString(),
       },
       name: {
         S: body.name,

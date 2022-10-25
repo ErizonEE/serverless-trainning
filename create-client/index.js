@@ -2,7 +2,7 @@ const { validate } = require("./Validator.js");
 const { create } = require("./ClientService.js");
 
 module.exports.handler = async (event) => {
-  const body = event;
+  const body = JSON.parse(event.body);
   const validationResult = validate(body);
   
   if (validationResult.isValid === false) {
@@ -16,7 +16,7 @@ module.exports.handler = async (event) => {
     await create(body);
   }
   catch(error) {
-    console.log(error);
+    console.error(error);
     
     return {
       statusCode: 500,
