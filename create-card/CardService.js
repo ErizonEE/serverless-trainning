@@ -9,8 +9,11 @@ const dynamodb = new DYNAMODB({
 
 const createAndAssign = async (client) => {
   const clientCard = create(client);
+  console.info('Card created');
 
   await save(client, clientCard);
+
+  console.info('Persisted card');
   
   return clientCard;
 };
@@ -36,12 +39,12 @@ async function save(client, clientCard) {
       ":c": {
         M: {
           "number": {
-            S: clientCard.number,
+            S: clientCard.number.toString(),
           },
           "expiration": {
             S: clientCard.expirationDate,
           },
-          "ccv": {
+          "securityCode": {
             S: clientCard.securityCode,
           },
           "type":{
@@ -59,11 +62,8 @@ async function save(client, clientCard) {
     TableName: process.env.CLIENT_TABLE,
     UpdateExpression: "SET #C = :c",
   };
-
-  const dbResult = await dynamodb.updateItem(dbParams).promise();
-  console.info(dbResult);
-
-  return dbResult;
+  
+  return dynamodb.updateItem(dbParams).promise();
 }
 
 function getTypeForCreation(client) {
@@ -86,7 +86,7 @@ function generateSecurityCode() {
 }
 
 function generateNumber() {
-  return generateRandomNumber(4000000000000000, 4999999999999999).toString();
+  return generateRandomNumber(4000000000000000, 4999999999999999);
 }
 
 function generateRandomNumber(minimum, maximum) {
