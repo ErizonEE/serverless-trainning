@@ -1,5 +1,0 @@
-Resources:
-  ClientCreatedTopic:
-    Type: AWS::SNS::Topic
-    Properties: 
-      TopicName: sls-erizonEncina-clientCreated
