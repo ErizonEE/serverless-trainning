@@ -4,5 +4,8 @@
   "description": "",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
 }
