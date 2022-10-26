@@ -2,7 +2,7 @@ Resources:
   ClientTable:
     Type: AWS::DynamoDB::GlobalTable
     Properties:
-      TableName: erizonEncina-client
+      TableName: sls-erizonEncina-client
       AttributeDefinitions:
       - AttributeName: dni
         AttributeType: S

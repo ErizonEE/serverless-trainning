@@ -1,12 +1,18 @@
-erizonEncina-createClient:
+createClient:
   handler: create-client/index.handler
   description: 'Create new Client'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: SNS:Publish     
+      Resource: { Ref: ClientCreatedTopic }
+    - Effect: "Allow"        
+      Action: dynamodb:PutItem    
+      Resource: !GetAtt ClientTable.Arn
   environment:
-    CLIENT_TABLE: erizonEncina-client
-    DEFAULT_REGION: us-east-1
-    CLIENT_CREATED_TOPIC_ARN: !Sub arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:table/${file(resource/index.json):score.scoresTable}
-
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+    CLIENT_CREATED_TOPIC_ARN: { Ref: ClientCreatedTopic }
   events:
     - http:
-          path: /clients
-          method: post
+        path: /clients
+        method: post

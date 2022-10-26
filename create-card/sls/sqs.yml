@@ -1,0 +1,29 @@
+Resources:
+  CreateCardQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: sls-erizonEncina-createCardQueue
+  CreateCardQueueSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: !Ref ClientCreatedTopic
+      Endpoint: !GetAtt CreateCardQueue.Arn
+      Protocol: sqs
+  CreateCardQueuePolicy: 
+    Type: AWS::SQS::QueuePolicy
+    Properties: 
+      Queues: 
+        - { Ref: CreateCardQueue }
+      PolicyDocument: 
+        Statement: 
+          - 
+            Effect: "Allow"
+            Action: 
+              - "SQS:SendMessage"
+            Principal:
+              Service: "sns.amazonaws.com"
+            Resource:
+              - !GetAtt CreateCardQueue.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Ref ClientCreatedTopic

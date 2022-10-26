@@ -55,7 +55,7 @@ async function save(client, clientCard) {
     },
     Key: {
       dni: {
-        N: client.dni,
+        S: client.dni.toString(),
       },
     },
     ReturnValues: "ALL_NEW",
