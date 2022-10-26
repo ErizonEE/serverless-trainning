@@ -16,7 +16,10 @@ resources:
   - ${file(create-client/sls/sns.yml)}
   # Create Card
   - ${file(create-card/sls/sqs.yml)}
+  # Assign gift
+  - ${file(assign-gift/sls/sqs.yml)}
 
 functions:
   - ${file(create-client/sls/serverless.yml)}
   - ${file(create-card/sls/serverless.yml)}
+  - ${file(assign-gift/sls/serverless.yml)}

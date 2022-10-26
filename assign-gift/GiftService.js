@@ -30,7 +30,7 @@ const createAndAssign = async (client) => {
 
     console.info('Gift assigned');
   
-    await save(client.dni, gift);
+    await save(client.dni.toString(), gift);
   
     console.info('Persisted gift');
     
@@ -65,7 +65,7 @@ const save = async (clientId, gift) => {
         },
         Key: {
           dni: {
-            N: clientId,
+            S: clientId,
           },
         },
         ReturnValues: "ALL_NEW",

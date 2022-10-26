@@ -1,0 +1,16 @@
+assignGift:
+  handler: assign-gift/index.handler
+  description: 'Assign a welcome gift for new client'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: dynamodb:UpdateItem    
+      Resource: !GetAtt ClientTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+  events:
+    - sqs:
+        arn:
+          Fn::GetAtt:
+            - AssignGiftQueue
+            - Arn
