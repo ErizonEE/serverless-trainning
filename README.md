@@ -11,3 +11,8 @@ Ejercicio Práctico de Unit Tests para Academy.
 5- Mostrar coverage.
 
 BT: Forzar la falla del `PaymentsService.validate` y verificar que no se llame a la función `PaymentsService.create`.
+
+
+### Correr test y coverage
+1-```npm run test```
+2-```npm run test:coverage```
