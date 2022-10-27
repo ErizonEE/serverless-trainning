@@ -13,6 +13,7 @@ Ejercicio Práctico de Unit Tests para Academy.
 BT: Forzar la falla del `PaymentsService.validate` y verificar que no se llame a la función `PaymentsService.create`.
 
 
-### Correr test y coverage
-1-```npm run test```
-2-```npm run test:coverage```
+### Correr tests
+```npm run test```
+### Correr tests con coverage
+```npm run test:coverage```
