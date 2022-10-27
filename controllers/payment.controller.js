@@ -1,8 +1,13 @@
 const PaymentsService = require('../services/payment.service');
 
 function createPayment(data) {
-    PaymentsService.validate(data);
-    PaymentsService.create(data);
+    try {
+        PaymentsService.validate(data);
+        PaymentsService.create(data);
+    }
+    catch (e) {
+        return 'Ups. something went wrong. Here handle exception correctly';
+    }
 }
 
 function getPaymentById(id) {

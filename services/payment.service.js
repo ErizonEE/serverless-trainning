@@ -5,6 +5,11 @@ function getPayments() {
 }
 
 function validate(data) {
+    if(data.exception)
+    {
+        throw new Error();
+    }
+
     console.log('Payment validation');
 }
 
