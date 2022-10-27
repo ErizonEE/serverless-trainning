@@ -5,17 +5,20 @@ const { validate } = require('../../../../services/payment.service');
 const { create } = require('../../../../services/payment.service');
 
 describe('Creation test suit case', () => {
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+      });
+
     test('Success creation', () => {
         // Config
         const data = { value: 1 };
-
-        validate.mockReturnValue(true);
-
+    
         // Calls
         createPayment(data);
         
         // Asserts
-        expect(validate).toHaveBeenCalledTimes(1);
-        expect(create).toHaveBeenCalledTimes(1);
+        expect(validate).toHaveBeenNthCalledWith(1, data);
+        expect(create).toHaveBeenNthCalledWith(1, data);
     });
 });
