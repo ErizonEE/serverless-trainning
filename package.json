@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ErizonEE/serverless-trainning#readme",
   "devDependencies": {
     "serverless-iam-roles-per-function": "^3.2.0-e97ab49"
+  },
+  "dependencies": {
+    "ebased": "^1.6.2"
   }
 }

@@ -1,5 +1,5 @@
 createCard:
-  handler: create-card/index.handler
+  handler: src/create-card/index.handler
   description: 'Create client card'
   iamRoleStatements:
     - Effect: "Allow"        

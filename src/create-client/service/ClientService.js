@@ -9,20 +9,20 @@ const dynamodb = new DYNAMODB({
   region: process.env.DEFAULT_REGION,
 });
 
-const create = async (body) => {
+const create = async (newClient) => {
   const dbParams = {
     Item: {
       dni: {
-        S: body.dni.toString(),
+        S: newClient.dni.toString(),
       },
       name: {
-        S: body.name,
+        S: newClient.name,
       },
       lastName: {
-        S: body.lastName,
+        S: newClient.lastName,
       },
       birth: {
-        S: body.birthday,
+        S: newClient.birthday,
       },
     },
     ReturnConsumedCapacity: "TOTAL",
@@ -30,7 +30,7 @@ const create = async (body) => {
   };
 
   const snsParams = {
-    Message: JSON.stringify(body),
+    Message: JSON.stringify(newClient),
     TopicArn: process.env.CLIENT_CREATED_TOPIC_ARN,
   };
 

@@ -1,5 +1,5 @@
 assignGift:
-  handler: assign-gift/index.handler
+  handler: src/assign-gift/index.handler
   description: 'Assign a welcome gift for new client'
   iamRoleStatements:
     - Effect: "Allow"        
