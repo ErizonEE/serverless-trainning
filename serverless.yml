@@ -1,4 +1,4 @@
-service: erizonEncina-ejercicioSls
+service: erizonEncina-ejercicioEbased
 
 frameworkVersion: ^2.59.0
 

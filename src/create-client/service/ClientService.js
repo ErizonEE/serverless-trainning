@@ -1,43 +1,30 @@
-const DYNAMODB = require("aws-sdk/clients/dynamodb");
-const SNS = require("aws-sdk/clients/sns");
+const dynamo = require('ebased/service/storage/dynamo');
+const { CLIENT_TABLE } = process.env;
 
-const sns = new SNS({
-  region: process.env.DEFAULT_REGION,
-});
-    
-const dynamodb = new DYNAMODB({
-  region: process.env.DEFAULT_REGION,
-});
+const { ClientCreatedEvent } = require('../schema/event/clientCreatedEvent');
+const sns = require('ebased/service/downstream/sns');
+const { CLIENT_CREATED_TOPIC_ARN } = process.env;
 
 const create = async (newClient) => {
-  const dbParams = {
-    Item: {
-      dni: {
-        S: newClient.dni.toString(),
-      },
-      name: {
-        S: newClient.name,
-      },
-      lastName: {
-        S: newClient.lastName,
-      },
-      birth: {
-        S: newClient.birthday,
-      },
-    },
-    ReturnConsumedCapacity: "TOTAL",
-    TableName: process.env.CLIENT_TABLE,
+  const client = await dynamo.putItem({
+    TableName: CLIENT_TABLE,
+    Item: newClient,
+  });
+
+  return client.Item;
+};
+
+/**
+ * @param {ClientCreatedEvent} newClientEvent 
+ */
+const emitClientCreated = async (newClientEvent) => {
+  const { eventPayload, eventMeta } = newClientEvent.get();
+  const snsPublishParams = {
+    TopicArn: CLIENT_CREATED_TOPIC_ARN,
+    Message: eventPayload,
   };
 
-  const snsParams = {
-    Message: JSON.stringify(newClient),
-    TopicArn: process.env.CLIENT_CREATED_TOPIC_ARN,
-  };
+  await sns.publish(snsPublishParams, eventMeta);
+};
 
-  const dbResult = await dynamodb.putItem(dbParams).promise();
-  console.info(dbResult);
-  const snsResult = await sns.publish(snsParams).promise();
-  console.info(snsResult);
-}
-
-module.exports = { create }
+module.exports = { create, emitClientCreated }

@@ -1,16 +1,16 @@
-// const { FaultHandled } = require('ebased/util/error');
-
+const { ClientCreatedEvent } = require('../schema/event/clientCreatedEvent');
 const { CreateClientValidation } = require('../schema/input/CreateClientValidation');
 
 const ClientService = require('../service/ClientService');
 
 module.exports = async (commandPayload, commandMeta) => {
-    console.info(commandPayload);
     // Input validation
     new CreateClientValidation(commandPayload, commandMeta);
 
     // Service calls
-    await ClientService.create(commandPayload);
+    const clientCreated = await ClientService.create(commandPayload);
+    await ClientService.emitClientCreated(new ClientCreatedEvent(clientCreated, commandMeta));
 
-    return commandPayload;
+    // Response
+    return { body: clientCreated };
 };
