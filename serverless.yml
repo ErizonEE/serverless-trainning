@@ -17,9 +17,9 @@ resources:
   # Create Card
   - ${file(resources/card/sqs.yml)}
   # Assign gift
-  - ${file(resources/gift/sqs.yml)}
+  # - ${file(resources/gift/sqs.yml)}
 
 functions:
   - ${file(src/client/serverless.yml)}
   - ${file(src/card/serverless.yml)}
-  - ${file(src/gift/serverless.yml)}
+  # - ${file(src/gift/serverless.yml)}

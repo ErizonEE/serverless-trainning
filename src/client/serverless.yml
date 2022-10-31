@@ -1,5 +1,5 @@
 createClient:
-  handler: src/client/handler/index.handler
+  handler: src/client/handler/create.handler
   description: 'Create new Client'
   iamRoleStatements:
     - Effect: "Allow"        
