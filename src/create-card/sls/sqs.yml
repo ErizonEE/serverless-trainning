@@ -2,7 +2,7 @@ Resources:
   CreateCardQueue:
     Type: AWS::SQS::Queue
     Properties: 
-      QueueName: sls-erizonEncina-createCardQueue
+      QueueName: integrador-erizonEncina-createCardQueue
   CreateCardQueueSubscription:
     Type: 'AWS::SNS::Subscription'
     Properties:

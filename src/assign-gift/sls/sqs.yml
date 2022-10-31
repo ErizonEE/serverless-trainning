@@ -2,7 +2,7 @@ Resources:
   AssignGiftQueue:
     Type: AWS::SQS::Queue
     Properties: 
-      QueueName: sls-erizonEncina-assignGiftQueue
+      QueueName: integrador-erizonEncina-assignGiftQueue
   AssignGiftQueueSubscription:
     Type: 'AWS::SNS::Subscription'
     Properties:

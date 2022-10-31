@@ -1,4 +1,4 @@
-service: erizonEncina-ejercicioEbased
+service: erizonEncina-practicoIntegrador
 
 frameworkVersion: ^2.59.0
 
@@ -12,14 +12,14 @@ provider:
 
 resources:
   # Create Client
-  - ${file(src/create-client/sls/dynamodb.yml)}
-  - ${file(src/create-client/sls/sns.yml)}
+  - ${file(resources/client/dynamodb.yml)}
+  - ${file(resources/client/sns.yml)}
   # Create Card
-  - ${file(src/create-card/sls/sqs.yml)}
+  - ${file(resources/card/sqs.yml)}
   # Assign gift
-  - ${file(src/assign-gift/sls/sqs.yml)}
+  - ${file(resources/gift/sqs.yml)}
 
 functions:
-  - ${file(src/create-client/sls/serverless.yml)}
-  - ${file(src/create-card/sls/serverless.yml)}
-  - ${file(src/assign-gift/sls/serverless.yml)}
+  - ${file(src/client/serverless.yml)}
+  - ${file(src/card/serverless.yml)}
+  - ${file(src/gift/serverless.yml)}
