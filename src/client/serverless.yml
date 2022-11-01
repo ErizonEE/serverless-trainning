@@ -16,3 +16,18 @@ createClient:
     - http:
         path: /clients
         method: post
+getClients:
+  handler: src/client/handler/all.handler
+  description: 'Index of Client Resource'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: dynamodb:Scan    
+      Resource: !GetAtt ClientTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+    CLIENT_CREATED_TOPIC_ARN: { Ref: ClientCreatedTopic }
+  events:
+    - http:
+        path: /clients
+        method: get

@@ -27,4 +27,9 @@ const emitClientCreated = async (newClientEvent) => {
   await sns.publish(snsPublishParams, eventMeta);
 };
 
-module.exports = { create, emitClientCreated }
+
+const index = async () => {
+  return (await dynamo.scanTable({ TableName: CLIENT_TABLE })).Items;
+};
+
+module.exports = { create, emitClientCreated, index }
