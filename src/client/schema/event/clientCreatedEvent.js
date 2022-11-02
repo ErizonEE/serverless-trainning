@@ -3,7 +3,7 @@ const { DownstreamEvent } = require('ebased/schema/downstreamEvent');
 class ClientCreatedEvent extends DownstreamEvent {
   constructor(payload, meta) {
     super({
-      type: 'EXCHANGE.CLIENT_CREATED',
+      type: 'CLIENT.CREATED',
       specversion: 'v1.0.0',
       payload: payload,
       meta: meta,

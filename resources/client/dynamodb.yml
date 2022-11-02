@@ -6,9 +6,18 @@ Resources:
       AttributeDefinitions:
       - AttributeName: dni
         AttributeType: S
+      - AttributeName: uuid
+        AttributeType: S
       KeySchema:
         - AttributeName: dni
           KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: UuidIndex
+          KeySchema:
+            - AttributeName: uuid
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
       Replicas:
       - Region: !Ref AWS::Region
       BillingMode: PAY_PER_REQUEST

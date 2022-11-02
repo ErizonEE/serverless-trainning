@@ -26,8 +26,35 @@ getClients:
   environment:
     CLIENT_TABLE: { Ref: ClientTable }
     DEFAULT_REGION: !Sub ${AWS::Region}
-    CLIENT_CREATED_TOPIC_ARN: { Ref: ClientCreatedTopic }
   events:
     - http:
         path: /clients
         method: get
+getClient:
+  handler: src/client/handler/read.handler
+  description: 'Get specific client'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: dynamodb:GetItem   
+      Resource: !GetAtt ClientTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+  events:
+    - http:
+        path: /clients/get-by-id
+        method: get
+updateClient:
+  handler: src/client/handler/update.handler
+  description: 'Update specific client'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: dynamodb:UpdateItem   
+      Resource: !GetAtt ClientTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+  events:
+    - http:
+        path: /clients/{uuid}
+        method: put

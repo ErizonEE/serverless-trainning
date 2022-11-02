@@ -2,6 +2,7 @@ const dynamo = require('ebased/service/storage/dynamo');
 const { CLIENT_TABLE } = process.env;
 
 const { ClientCreatedEvent } = require('../schema/event/clientCreatedEvent');
+const { ClientUpdatedEvent } = require('../schema/event/clientUpdatedEvent');
 const sns = require('ebased/service/downstream/sns');
 const { CLIENT_CREATED_TOPIC_ARN } = process.env;
 
@@ -12,6 +13,15 @@ const create = async (newClient) => {
   });
 
   return client.Item;
+};
+
+const show = async (clientId) => {
+  const { Item } = await dynamo.getItem({
+    TableName: CLIENT_TABLE,
+    Key: { dni: clientId },
+  });
+
+  return Item;
 };
 
 /**
@@ -27,9 +37,22 @@ const emitClientCreated = async (newClientEvent) => {
   await sns.publish(snsPublishParams, eventMeta);
 };
 
+/**
+ * @param { ClientUpdatedEvent } clientUpdatedEvent 
+ */
+const emitClientUpdated = async (clientUpdatedEvent) => {
+  console.info('emitting client updated .....');
+  // const { eventPayload, eventMeta } = clientUpdatedEvent.get();
+  // const snsPublishParams = {
+  //   TopicArn: CLIENT_CREATED_TOPIC_ARN,
+  //   Message: eventPayload,
+  // };
+
+  // await sns.publish(snsPublishParams, eventMeta);
+}
 
 const index = async () => {
   return (await dynamo.scanTable({ TableName: CLIENT_TABLE })).Items;
 };
 
-module.exports = { create, emitClientCreated, index }
+module.exports = { index, create, show, emitClientCreated, emitClientUpdated }
