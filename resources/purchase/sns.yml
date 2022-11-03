@@ -1,0 +1,5 @@
+Resources:
+  PurchaseCreatedTopic:
+    Type: AWS::SNS::Topic
+    Properties: 
+      TopicName: integrador-erizonEncina-purchaseCreated

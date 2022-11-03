@@ -14,12 +14,17 @@ resources:
   # Create Client
   - ${file(resources/client/dynamodb.yml)}
   - ${file(resources/client/sns.yml)}
+  - ${file(resources/client/sqs.yml)}
   # Create Card
   - ${file(resources/card/sqs.yml)}
   # Assign gift
   - ${file(resources/gift/sqs.yml)}
+  # Create Purchase
+  - ${file(resources/purchase/dynamodb.yml)}
+  - ${file(resources/purchase/sns.yml)}
 
 functions:
   - ${file(src/client/serverless.yml)}
   - ${file(src/card/serverless.yml)}
   - ${file(src/gift/serverless.yml)}
+  - ${file(src/purchase/serverless.yml)}

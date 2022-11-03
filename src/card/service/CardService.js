@@ -93,4 +93,4 @@ function generateRandomNumber(minimum, maximum) {
   return Math.round(Math.random() * (maximum - minimum) + minimum);
 }
 
-module.exports = { createAndAssign };
+module.exports = { createAndAssign, TYPE_CLASSIC, TYPE_GOLDEN };

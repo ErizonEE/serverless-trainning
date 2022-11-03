@@ -1,0 +1,29 @@
+Resources:
+  NewClientPurchaseQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: integrador-erizonEncina-newClientPurchaseQueue
+  NewClientPurchaseQueueSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: !Ref PurchaseCreatedTopic
+      Endpoint: !GetAtt NewClientPurchaseQueue.Arn
+      Protocol: sqs
+  NewClientPurchaseQueuePolicy: 
+    Type: AWS::SQS::QueuePolicy
+    Properties: 
+      Queues: 
+        - { Ref: NewClientPurchaseQueue }
+      PolicyDocument: 
+        Statement: 
+          - 
+            Effect: "Allow"
+            Action: 
+              - "SQS:SendMessage"
+            Principal:
+              Service: "sns.amazonaws.com"
+            Resource:
+              - !GetAtt NewClientPurchaseQueue.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Ref PurchaseCreatedTopic

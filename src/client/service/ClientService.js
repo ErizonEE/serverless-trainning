@@ -41,7 +41,6 @@ const emitClientCreated = async (newClientEvent) => {
  * @param { ClientUpdatedEvent } clientUpdatedEvent 
  */
 const emitClientUpdated = async (oldClient, newClient) => {
-  console.info('emitting client updated .....');
 
   const snsPublishParams = {
     TopicArn: CLIENT_UPDATED_TOPIC_ARN,

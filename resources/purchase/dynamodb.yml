@@ -1,0 +1,23 @@
+Resources:
+  PurchaseTable:
+    Type: AWS::DynamoDB::GlobalTable
+    Properties:
+      TableName: integrador-erizonEncina-purchase
+      AttributeDefinitions:
+      - AttributeName: uuid
+        AttributeType: S
+      - AttributeName: clientId
+        AttributeType: S
+      KeySchema:
+        - AttributeName: uuid
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: ClientIdIndex
+          KeySchema:
+            - AttributeName: clientId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      Replicas:
+      - Region: !Ref AWS::Region
+      BillingMode: PAY_PER_REQUEST

@@ -65,3 +65,19 @@ updateClient:
     - http:
         path: /clients
         method: put
+newPurchase:
+  handler: src/client/handler/newPurchase.handler
+  description: 'Process a new purchase of client'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: dynamodb:UpdateItem    
+      Resource: !GetAtt ClientTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+  events:
+    - sqs:
+        arn:
+          Fn::GetAtt:
+            - NewClientPurchaseQueue
+            - Arn

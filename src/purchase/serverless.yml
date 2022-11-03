@@ -1,0 +1,22 @@
+createPurchase:
+  handler: src/purchase/handler/create.handler
+  description: 'Create new Purchase'
+  iamRoleStatements:
+    - Effect: "Allow"        
+      Action: SNS:Publish     
+      Resource: { Ref: PurchaseCreatedTopic }
+    - Effect: "Allow"        
+      Action: dynamodb:GetItem    
+      Resource: !GetAtt ClientTable.Arn
+    - Effect: "Allow"        
+      Action: dynamodb:PutItem    
+      Resource: !GetAtt PurchaseTable.Arn
+  environment:
+    CLIENT_TABLE: { Ref: ClientTable }
+    PURCHASE_TABLE: { Ref: PurchaseTable }
+    DEFAULT_REGION: !Sub ${AWS::Region}
+    PURCHASE_CREATED_TOPIC_ARN: { Ref: PurchaseCreatedTopic }
+  events:
+    - http:
+        path: /purchases
+        method: post
