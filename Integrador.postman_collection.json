@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "6d353635-aa28-4122-938d-79d498ce5cf2",
+		"name": "Integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18746167"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dni\": \"{{clientDni}}\",\n  \"name\": \"Erizon\",\n  \"lastName\": \"Encina\",\n  \"birthday\": \"1992-12-04\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://training.cloudnaranja.com/integrador-erizonEncina/clients",
+							"protocol": "https",
+							"host": [
+								"training",
+								"cloudnaranja",
+								"com"
+							],
+							"path": [
+								"integrador-erizonEncina",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://training.cloudnaranja.com/integrador-erizonEncina/clients",
+							"protocol": "https",
+							"host": [
+								"training",
+								"cloudnaranja",
+								"com"
+							],
+							"path": [
+								"integrador-erizonEncina",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://training.cloudnaranja.com/integrador-erizonEncina/clients/get-by-id?id={{clientDni}}",
+							"protocol": "https",
+							"host": [
+								"training",
+								"cloudnaranja",
+								"com"
+							],
+							"path": [
+								"integrador-erizonEncina",
+								"clients",
+								"get-by-id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{clientDni}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dni\": \"{{clientDni}}\",\n    \"enable\": false,\n    \"name\": \"Erizon Eligio\",\n    \"lastName\": \"Encina\",\n    \"birthday\": \"1992-08-04\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://training.cloudnaranja.com/integrador-erizonEncina/clients",
+							"protocol": "https",
+							"host": [
+								"training",
+								"cloudnaranja",
+								"com"
+							],
+							"path": [
+								"integrador-erizonEncina",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchases",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"clientId\": \"{{clientDni}}\",\n  \"products\": [\n      { \"name\": \"prueba\", \"price\": 1000 }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://training.cloudnaranja.com/integrador-erizonEncina/purchases",
+							"protocol": "https",
+							"host": [
+								"training",
+								"cloudnaranja",
+								"com"
+							],
+							"path": [
+								"integrador-erizonEncina",
+								"purchases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
