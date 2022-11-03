@@ -3,3 +3,7 @@ Resources:
     Type: AWS::SNS::Topic
     Properties: 
       TopicName: integrador-erizonEncina-clientCreated
+  ClientBirthdayUpdatedTopic:
+    Type: AWS::SNS::Topic
+    Properties: 
+      TopicName: integrador-erizonEncina-clientBirthdayUpdated

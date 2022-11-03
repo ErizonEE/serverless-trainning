@@ -7,7 +7,7 @@ module.exports = async (commandPayload, commandMeta) => {
     const client = await ClientService.show(commandPayload.id);
 
     console.log('client is: ', client);
-    if(!client) {
+    if(!client || client.enable === false) {
         throw new ErrorHandled('Resource Not Found', { code: 404 });
     }
 

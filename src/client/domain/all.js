@@ -6,5 +6,5 @@ module.exports = async (commandPayload, commandMeta) => {
     const clients = await ClientService.index();
 
     // Response
-    return { body: clients };
+    return { body: clients.filter(client => client.enable === true) };
 };

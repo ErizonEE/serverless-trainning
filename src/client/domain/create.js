@@ -9,6 +9,7 @@ module.exports = async (commandPayload, commandMeta) => {
     new CreateClientValidation(commandPayload, commandMeta);
 
     commandPayload.uuid = uuid.v4();
+    commandPayload.enable = true;
 
     // Service calls
     const clientCreated = await ClientService.create(commandPayload);

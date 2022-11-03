@@ -51,10 +51,17 @@ updateClient:
     - Effect: "Allow"        
       Action: dynamodb:UpdateItem   
       Resource: !GetAtt ClientTable.Arn
+    - Effect: "Allow"        
+      Action: dynamodb:GetItem   
+      Resource: !GetAtt ClientTable.Arn
+    - Effect: "Allow"        
+      Action: SNS:Publish     
+      Resource: { Ref: ClientBirthdayUpdatedTopic }
   environment:
     CLIENT_TABLE: { Ref: ClientTable }
     DEFAULT_REGION: !Sub ${AWS::Region}
+    CLIENT_BIRTHDAY_UPDATED_TOPIC_ARN: { Ref: ClientBirthdayUpdatedTopic }
   events:
     - http:
-        path: /clients/{uuid}
+        path: /clients
         method: put

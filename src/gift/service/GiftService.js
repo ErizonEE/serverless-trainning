@@ -11,7 +11,7 @@ const AUTUM_GIFT = 'buzo';
 const WINTER_GIFT = 'sweater';
 
 const createAndAssign = async (client) => {
-    const season = getSeason((new Date).getMonth() + 1);
+    const season = getSeason((new Date(client.birthday)).getMonth() + 1);
     let gift;
 
     switch(season) {
@@ -38,15 +38,15 @@ const createAndAssign = async (client) => {
 };
 
 const getSeason = (month) => {
-    if (3 <= month && month <= 5) {
+    if (3 >= month && month <= 5) {
         return 'autum';
     }
   
-    if (6 <= month && month <= 8) {
+    if (6 >= month && month <= 8) {
       return 'winter';
     }
 
-    if (9 <= month && month <= 11) {
+    if (9 >= month && month <= 11) {
       return 'spring';
     }
 

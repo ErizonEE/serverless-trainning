@@ -9,6 +9,12 @@ Resources:
       TopicArn: !Ref ClientCreatedTopic
       Endpoint: !GetAtt AssignGiftQueue.Arn
       Protocol: sqs
+  AssignGiftQueueFromClientUpdatedSubscription:
+    Type: 'AWS::SNS::Subscription'
+    Properties:
+      TopicArn: !Ref ClientBirthdayUpdatedTopic
+      Endpoint: !GetAtt AssignGiftQueue.Arn
+      Protocol: sqs
   AssignGiftQueuePolicy: 
     Type: AWS::SQS::QueuePolicy
     Properties: 
@@ -27,3 +33,14 @@ Resources:
             Condition:
               ArnLike:
                 aws:SourceArn: !Ref ClientCreatedTopic
+          - 
+            Effect: "Allow"
+            Action: 
+              - "SQS:SendMessage"
+            Principal:
+              Service: "sns.amazonaws.com"
+            Resource:
+              - !GetAtt AssignGiftQueue.Arn
+            Condition:
+              ArnLike:
+                aws:SourceArn: !Ref ClientBirthdayUpdatedTopic
