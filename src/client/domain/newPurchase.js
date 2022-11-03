@@ -4,7 +4,7 @@ const { show } = require('../service/ClientService');
 const { updatePoint } = require('../service/UpdatePointService');
 
 function calculateNewPoints(products) {
-    return products.map(product => Match.trunc(product.finalPrice / 200)).reduce(preV, curV => preV + curV, 0);
+    return products.map(product => Math.trunc(product.finalPrice / 200)).reduce((preV, curV) => preV + curV, 0);
 }
 
 module.exports = async (commandPayload, commandMeta) => {
@@ -18,8 +18,7 @@ module.exports = async (commandPayload, commandMeta) => {
     points = points + calculateNewPoints(commandPayload.products);
 
     // Service calls
-    // const clientCreated = await ClientService.create(commandPayload);
-    // await ClientService.emitClientCreated(new ClientCreatedEvent(clientCreated, commandMeta));
+    await updatePoint(client.dni, points);
 
     // Response
     return { body: points };
